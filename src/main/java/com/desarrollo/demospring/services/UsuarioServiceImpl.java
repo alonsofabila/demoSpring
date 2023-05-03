@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
@@ -24,9 +25,4 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return result;
     }
-
-
-
-
-
 }
