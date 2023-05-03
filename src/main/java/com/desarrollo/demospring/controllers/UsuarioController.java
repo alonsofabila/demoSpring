@@ -17,6 +17,7 @@ public class UsuarioController {
         return "login";
     }
 
+
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password){
@@ -29,8 +30,24 @@ public class UsuarioController {
     }
 
 
+    @RequestMapping("/changepassword")
+    public String showChangePass(Model model) {
+        return "changepassword";
+    }
 
 
-
+    @RequestMapping(value="/changepassword", method = RequestMethod.POST)
+    public String changePassword(@RequestParam("username") String username,
+                                 @RequestParam("oldPassword") String oldPassword,
+                                 @RequestParam("newPassword") String newPassword,
+                                 Model model){
+        if(usuarioService.changePassword(username, oldPassword, newPassword)){
+            return "redirect:/login";
+        }
+        else{
+            model.addAttribute("error", "***ERROR*** no se pudo cambiar la contraseña");
+            return "changepassword";
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.desarrollo.demospring.controllers;
 
+import com.desarrollo.demospring.entities.ChangePassword;
 import com.desarrollo.demospring.entities.Login;
 import com.desarrollo.demospring.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,16 @@ public class UsuarioRestController {
             return new ResponseEntity<>("ERROR!", HttpStatus.NOT_FOUND);
         }
     }
+
+
+    @PostMapping("/changepasswordrest")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePassword changePassword){
+        if(usuarioService.changePassword(changePassword.getUsername(), changePassword.getOldPass(), changePassword.getNewPass())){
+            return new ResponseEntity<String>("Se cambio la contraseña", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("***ERROR*** no se pudo cambiar la contraseña", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
